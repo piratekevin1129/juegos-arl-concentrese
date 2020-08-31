@@ -6,6 +6,25 @@ function getRand(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
+function unorderArrayElementos(long){
+	var desorden = []
+	while(desorden.length<long){
+		var a = getRand(0,(long-1))
+		var a_exists = desorden.includes(a)
+		while(a_exists){
+			a = getRand(0,(long-1))
+			a_exists = desorden.includes(a)
+		}
+		desorden.push(a)
+	}
+
+	var nuevo = []
+	for(i = 0;i<long;i++){
+		nuevo.push(posiciones_cajas[desorden[i]])
+	}
+	posiciones_cajas = nuevo
+}
+
 
 var game = getE('game')
 var game_scene = getE('game-scene')
@@ -95,42 +114,119 @@ function empezarJuego(){
 
 var parejas_data = []
 var total_parejas = 8
+var posiciones_cajas = []
 
 function setGame(){
-	loadElementos()
+	for(i = 0;i<total_parejas;i++){
+		parejas_data.push({
+			id:(i+1)
+			img1:'',
+			img2:''
+		})
+	}
+
+	for(i = 0;i<(total_parejas*2);i++){
+		posiciones_cajas.push((i+1))
+	}
+
+	unorderArrayElementos(posiciones_cajas.length)
+	loadElementos(1)
 }
 
-function loadElementos(){
+function findObj(id){
+	var inx = -1
+	for(j = 0;j<parejas_data.length;j++){
+		if(parejas_data[j].id==id){
+			inx = j
+		}
+	}
+	return inx
+}
 
+function loadElementos(e){
+	if(e>total_parejas){
+		putCajas()
+		console.log(parejas_data)
+	}else{
+		loadElemento(e)
+	}
 }
 
 function loadElemento(e){
 	var img = new Image()
 	img.onload = function(){
+		img.onerror = null
+		img.onload = null
+		img = null
 
-	}
-	img
-}
-
-
-function unorderArrayElementos(long){
-	var desorden = []
-	while(desorden.length<long){
-		var a = getRand(0,(long-1))
-		var a_exists = desorden.includes(a)
-		while(a_exists){
-			a = getRand(0,(long-1))
-			a_exists = desorden.includes(a)
+		//cargar segunda opción, si la hay
+		var img2 = new Image()
+		img2.onload = function(){
+			img2.onerror = null
+			img2.onload = null
+			img2 = null
+			parejas_data[e-1].img2 = '-2'
+			loadElementos((e+1))
 		}
-		desorden.push(a)
+		img2.onerror = function(){
+			img2.onerror = null
+			img2.onload = null
+			img2 = null
+			loadElementos((e+1))
+		}
+		img2.src = 'assets/images/elementos/'+e+'-2.png'
 	}
-
-	var nuevo = []
-	for(i = 0;i<long;i++){
-		nuevo.push(lista_elementos[desorden[i]])
+	img.onerror = function(){
+		img.onerror = null
+		img.onload = null
+		img = null
+		console.log("Error loading img: "+e)
+		loadElementos((e+1))
 	}
-	lista_elementos = nuevo
+	img.src = 'assets/images/elementos/'+e+'.png'
 }
+
+
+function putCajas(){
+	var p = 0
+	for(i = 0;i<parejas_data.length;i++){
+		//var obj = findObj(u)
+		var obj = parejas_data[i]
+
+		var caja1 = document.createElement('div')
+		caja1.className = 'caja caja-fill caja-pos-'+posiciones_cajas[p]
+		caja1.id = 'caja-'+(p+1)
+		caja1.setAttribute('occuped','yes')
+
+		var h1 = ''
+		h1+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="23" src="assets/images/cajita_sprite.png"></div>'
+		h1+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(p+1)+obj.img1+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
+		h1+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+(p+1)+'</div>'
+		h1+='<div id="caja-zona-'+(p+1)+'"></div>'
+		caja1.innerHTML = h1
+		
+		p++
+		var caja2 = document.createElement('div')
+		caja2.className = 'caja caja-fill caja-pos-'+posiciones_cajas[p]
+		caja2.id = 'caja-'+(p+1)
+		caja2.setAttribute('occuped','yes')
+
+		var h2 = ''
+		h2+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="23" src="assets/images/cajita_sprite.png"></div>'
+		h2+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(p+1)+obj.img2+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
+		h2+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+(p+1)+'</div>'
+		h2+='<div id="caja-zona-'+(p+1)+'"></div>'
+		caja2.innerHTML = h2
+
+		getE('cajas').appendChild(caja1)
+		getE('cajas').appendChild(caja2)
+
+		p++
+	}
+}
+
+
+
 
 
 /////////////////COMPROBAR////////////////

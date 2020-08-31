@@ -71,13 +71,6 @@
     #modal-title{
         font-size: 18px;
     }
-    .elemento-incorrecto{
-        width: 100%;
-        justify-content: center;
-    }
-    .elemento-incorrecto-img{
-        margin-right: 10px;
-    }
     #modal-button{
         cursor: default;
     }
