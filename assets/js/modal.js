@@ -43,7 +43,6 @@ function setModal(data){
 	}
 
 	modal.className = 'modal-on'
-	cronometro_mp3.pause()
 }
 
 var animacion_modal = null
@@ -52,7 +51,6 @@ function unsetModal(callBack){
 	modal.className = 'modal-off'
 	
 	boton_mp3.play()
-	cronometro_mp3.play()
 
 	animacion_modal = setTimeout(function(){
 		clearTimeout(animacion_modal)
@@ -79,7 +77,6 @@ function setAlerta(data){
 
 	getE('alerta').className = 'alerta-on'
 	boton_mp3.play()
-	cronometro_mp3.pause()
 
 	animacion_alerta = setTimeout(function(){
 		clearTimeout(animacion_alerta)
@@ -96,7 +93,6 @@ function setAlerta(data){
 			animacion_alerta = null
 
 			getE('alerta').className = 'alerta-off'
-			cronometro_mp3.play()
 			getE('alerta-box').className = 'alerta-'+data.direction+' alerta-'+data.direction+'-off'
 			if(data.callback!=null&&data.callback!=undefined){
 				data.callback()

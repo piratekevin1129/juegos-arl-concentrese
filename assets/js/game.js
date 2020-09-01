@@ -107,7 +107,7 @@ function empezarJuego(){
 				iniciarReloj()
 			},6000)*/
 		}else{
-			iniciarReloj()
+			//iniciarReloj()
 		}
 	})
 }
@@ -119,7 +119,7 @@ var posiciones_cajas = []
 function setGame(){
 	for(i = 0;i<total_parejas;i++){
 		parejas_data.push({
-			id:(i+1)
+			id:(i+1),
 			img1:'',
 			img2:''
 		})
@@ -146,7 +146,6 @@ function findObj(id){
 function loadElementos(e){
 	if(e>total_parejas){
 		putCajas()
-		console.log(parejas_data)
 	}else{
 		loadElemento(e)
 	}
@@ -194,28 +193,28 @@ function putCajas(){
 		var obj = parejas_data[i]
 
 		var caja1 = document.createElement('div')
-		caja1.className = 'caja caja-fill caja-pos-'+posiciones_cajas[p]
+		caja1.className = 'caja caja-closed caja-fill caja-pos-'+posiciones_cajas[p]
 		caja1.id = 'caja-'+(p+1)
 		caja1.setAttribute('occuped','yes')
 
 		var h1 = ''
 		h1+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="23" src="assets/images/cajita_sprite.png"></div>'
-		h1+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(p+1)+obj.img1+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
+		h1+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(i+1)+obj.img1+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
 		h1+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+(p+1)+'</div>'
-		h1+='<div id="caja-zona-'+(p+1)+'"></div>'
+		h1+='<div id="caja-zona-'+(p+1)+'" class="caja-zona" onclick="clickZona('+(p+1)+')"></div>'
 		caja1.innerHTML = h1
 		
 		p++
 		var caja2 = document.createElement('div')
-		caja2.className = 'caja caja-fill caja-pos-'+posiciones_cajas[p]
+		caja2.className = 'caja caja-closed caja-fill caja-pos-'+posiciones_cajas[p]
 		caja2.id = 'caja-'+(p+1)
 		caja2.setAttribute('occuped','yes')
 
 		var h2 = ''
 		h2+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="23" src="assets/images/cajita_sprite.png"></div>'
-		h2+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(p+1)+obj.img2+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
+		h2+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(i+1)+obj.img2+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
 		h2+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+(p+1)+'</div>'
-		h2+='<div id="caja-zona-'+(p+1)+'"></div>'
+		h2+='<div id="caja-zona-'+(p+1)+'" class="caja-zona" onclick="clickZona('+(p+1)+')"></div>'
 		caja2.innerHTML = h2
 
 		getE('cajas').appendChild(caja1)
@@ -223,9 +222,51 @@ function putCajas(){
 
 		p++
 	}
+
+	//load sprites
+	var cajas_animadas = getE('cajas').getElementsByClassName('caja-animada')
+	function loadSprite(s){
+		if(s==cajas_animadas.length){
+			////////AQUI EMPIEZA TODOO///////
+			
+			animation_start = setTimeout(function(){
+				clearTimeout(animation_start)
+				animation_start = null
+
+				getE('cargador').className = 'cargador-off'	
+				setInstrucciones(true)
+			},1000)
+		}else{
+			spdLoadSprite({idname:cajas_animadas[s].id,autoplay:'off',callBack:function(){
+				spdCreateAnimation({id:s,sprite:cajas_animadas[s].id})
+				loadSprite((s+1))
+			}})
+		}
+	}
+	loadSprite(0)
 }
 
 
+///////////FUNCIONES CAJA////////////
+var animation_box = false
+var caja_abierta_1 = null
+var caja_abierta_2 = null
+
+function clickZona(ident){
+	var indx = ident-1
+	var caja = getE('caja-'+ident)
+	if(caja.className.indexOf('closed!=-1')){
+		spdPlayAnimation({frame:1,stop:13,loop:false,callBack:function(){
+			//abrir bola
+			caja.classList.remove('caja-closed')
+			caja.classList.add('caja-opened')
+			
+			//console.log("abrió")
+		}},indx)
+	}
+	
+	
+}
 
 
 
