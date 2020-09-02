@@ -14,8 +14,8 @@
     <!--Estilos propios-->
     <link href="assets/css/fonts.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/master.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/master.css?action=getTime&bogus=<?php echo rand(100,999) ?>" rel="stylesheet" type="text/css" />
+    <link href="assets/css/responsive.css?action=getTime&bogus=<?php echo rand(100,999) ?>" rel="stylesheet" type="text/css" />
 
     <!--Libreria spider-->
     <link rel="stylesheet" type="text/css" href="assets/spider/sprites/sprite.css" />
@@ -47,11 +47,15 @@
                     <div id="cajas"></div>
                                        
                     <div id="personaje">
-                        <div id="personaje-main"><div class="personaje-ojos"></div></div>
-                        <div id="personaje-ropas"></div>
+                        <div id="personaje-main" class="personaje-1"><div class="personaje-ojos"></div></div>
+                        <div id="personaje-ropas">
+                            
+                        </div>
                     </div>
                 </div>
 
+                <div id="prenda1" class="prenda-move-off"></div>
+                <div id="prenda2" class="prenda-move-off"></div>
                 <div id="cursor-swipe"></div>
             </div>
             <div id="home-scene">
@@ -62,10 +66,6 @@
         <div id="tooltip" class="tooltip-off"></div>
 
         <div id="modal" class="modal-on">
-            <div id="personaje-2" class="personaje-off">
-                <div id="personaje-main-2"><div class="personaje-ojos"></div></div>
-                <div id="personaje-ropas-2"></div>
-            </div>
             <div id="modal-box">
                 <button id="modal-close-btn"></button>
                 <h2 id="modal-title">Instrucciones</h2>
