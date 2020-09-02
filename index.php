@@ -45,7 +45,13 @@
             <div id="game-scene">
                 <div id="game-wrapper">
                     <div id="cajas"></div>
-                                       
+                    
+                    <div id="fondo-win" class="fondo-win-off">
+                        <div id="fondo-win-img"></div>
+                        <div id="polvora-content"></div>
+                        <h1 id="titulo-win">¡Muy Bien!</h1>
+                    </div>
+
                     <div id="personaje">
                         <div id="personaje-main" class="personaje-1"><div class="personaje-ojos"></div></div>
                         <div id="personaje-ropas">
@@ -61,6 +67,7 @@
             <div id="home-scene">
                 <div id="personaje-home" class="personaje-1"><div class="personaje-ojos"></div></div>
             </div>
+
         </div>
 
         <div id="tooltip" class="tooltip-off"></div>
@@ -92,7 +99,7 @@
 <script src="assets/js/mobile.js"></script>
 <script src="assets/js/timer.js"></script>
 <script src="assets/js/modal.js"></script>
-<script src="assets/js/game.js"></script>
+<script src="assets/js/game.js?option=getTime&bogus=<?php rand(100,999)?>"></script>
 <script>
 
 var boton_mp3 = null
