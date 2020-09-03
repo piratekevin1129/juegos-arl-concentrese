@@ -141,6 +141,7 @@ header{
     height: 100%;
     top: 0px;
     left: 0px;
+    overflow: hidden;
 }
 #fondo-win-img{
     position: absolute;
@@ -156,7 +157,7 @@ header{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: url(../images/fondo_win_2.png);
+    background-image: url(../images/fondo_win_min.png);
     background-color: #900100;
 }
 .fondo-win-off{
@@ -255,11 +256,11 @@ header{
 .polvora-particle-on div{
     animation-iteration-count: 2;
     animation-duration: 1.5s;
-    animation-timing-function: ease-out;
+    animation-timing-function: linear;
     animation-fill-mode: forwards;
     -webkit-animation-iteration-count: 2;
     -webkit-animation-duration: 1.5s;
-    -webkit-animation-timing-function: ease-out;
+    -webkit-animation-timing-function: linear;
     -webkit-animation-fill-mode: forwards;
 
 }
@@ -401,15 +402,67 @@ header{
         opacity:0;
     }
 }
+#titulo-win{
+    position: absolute;
+    width: 230px;
+    height: 40px;
+    top: 87%;  
+    left: 50%;
+    left: calc(50% - (115px));
+    left: -moz-calc(50% - (115px));
+    margin: 0px;
 
-
-polvora.style.left = getRand(0,100)+'%'
-var h = ""
-h+='<div class="polvora1"></div>'
-h+='<div class="polvora2"></div>'
-h+='<div class="polvora3"></div>'
-h+='<div class="polvora4"></div>'
-polvora.innerHTML = h
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Barlow-Bold';
+    font-size: 40px;
+    text-align: center;
+    font-weight: normal;
+    line-height: normal;
+}
+#titulo-win > span{
+    display: block;
+    width: 100%;
+    z-index: 2;
+}
+#titulo-win::before{
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 10px;
+    left: 0%;
+    top: 100%;
+    top: calc(100% - 5px);
+    top: -moz-calc(100% - 5px);
+    background-color: #000000;
+    filter: blur(8px);
+    -webkit-filter: blur(8px);
+    -o-filter: blur(8px);
+    opacity: 0.8;
+    z-index: 0;
+}
+.fondo-win-on #titulo-win{
+    animation-name: animacion-titulo-win;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    -webkit-animation-name: animacion-titulo-win;
+    -webkit-animation-duration: 2s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+@keyframes animacion-titulo-win{
+    0% {
+        color: #FFFFFF;
+    }
+    50% {
+        color: #FFFF00;
+    }
+    100% {
+        color: #FFFFFF;
+    }
+}
 
 #personaje-home{
     position: absolute;
@@ -511,8 +564,8 @@ polvora.innerHTML = h
     box-sizing: border-box;
     width: 125px;
     height: 102px;
-    border: #000 solid 1px;
-    background-color: #FFFFFF;
+    border: rgba(0,0,0,0) solid 1px;
+    /*background-color: #FFFFFF;*/
 
     background-repeat: no-repeat;
     background-size: 20px 20px;
@@ -531,22 +584,22 @@ polvora.innerHTML = h
 .caja-empty{
 
 }
-.caja-pos-1{left: 65.05px; top:135.9px; z-index:85;}
-.caja-pos-2{left: 211.25px; top:135.9px; z-index:86;}
-.caja-pos-3{left: 354.05px; top:135.9px; z-index:87;}
-.caja-pos-4{left: 498.5px; top:135.9px; z-index:88;}
-.caja-pos-5{left: 137.3px; top:240.65px; z-index:89;}
-.caja-pos-6{left: 283.5px; top:240.65px; z-index:90;}
-.caja-pos-7{left: 426.3px; top:240.65px; z-index:91;}
-.caja-pos-8{left: 570.75px; top:240.65px; z-index:92;}
-.caja-pos-9{left: 65.05px; top:345.4px; z-index:93;}
-.caja-pos-10{left: 211.25px; top:345.4px; z-index:94;}
-.caja-pos-11{left: 354.05px; top:345.4px; z-index:95;}
-.caja-pos-12{left: 498.5px; top:345.4px; z-index:96;}
-.caja-pos-13{left: 137.3px; top:450.15px; z-index:97;}
-.caja-pos-14{left: 283.5px; top:450.15px; z-index:98;}
-.caja-pos-15{left: 426.3px; top:450.15px; z-index:99;}
-.caja-pos-16{left: 570.75px; top:450.15px; z-index:100;}
+.caja-pos-1{left: 87.05px; top:155.7px; z-index:85;}
+.caja-pos-2{left: 216.85px; top:155.7px; z-index:86;}
+.caja-pos-3{left: 346.65px; top:155.7px; z-index:87;}
+.caja-pos-4{left: 476.5px; top:155.7px; z-index:88;}
+.caja-pos-5{left: 148.65px; top:246.7px; z-index:89;}
+.caja-pos-6{left: 278.45px; top:246.7px; z-index:90;}
+.caja-pos-7{left: 408.25px; top:246.7px; z-index:91;}
+.caja-pos-8{left: 538.1px; top:246.7px; z-index:92;}
+.caja-pos-9{left: 87.05px; top:337.6px; z-index:93;}
+.caja-pos-10{left: 216.85px; top:337.6px; z-index:94;}
+.caja-pos-11{left: 346.65px; top:337.6px; z-index:95;}
+.caja-pos-12{left: 476.5px; top:337.6px; z-index:96;}
+.caja-pos-13{left: 148.65px; top:428.6px; z-index:97;}
+.caja-pos-14{left: 278.45px; top:428.6px; z-index:98;}
+.caja-pos-15{left: 408.25px; top:428.6px; z-index:99;}
+.caja-pos-16{left: 538.1px; top:428.6px; z-index:100;}
 
 .caja-pos-initial{
     z-index: initial !important;
@@ -656,13 +709,13 @@ polvora.innerHTML = h
 .caja-zona{
     position: absolute;
     width: 80px;
-    height: 80px;
-    bottom: 5px;
+    height: 70px;
+    bottom: 10px;
     left: 50%;
     left: calc(50% - 40px);
     left: -moz-calc(50% - 40px);
     background-color: #FF0000;
-    opacity: 0.3;
+    opacity: 0;
     cursor: pointer;
 }
 
@@ -766,6 +819,33 @@ polvora.innerHTML = h
 .prenda-move-off{
     z-index: 0;
     visibility: hidden;
+}
+
+#reloj{
+    position: absolute;
+    width: 70px;
+    height: 30px;
+    top: 28px;
+    left: 63px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: skewY(-1deg);
+    -webkit-transform: skewY(-1deg);
+    -o-transform: skewY(-1deg);
+}
+#tiempo-txt{
+    display: block;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+
+    font-family: 'DS-DIGIB';
+    font-size: 28px;
+    color: #FFFFFF;
+    text-align: center;
+    font-weight: normal;
+    line-height: normal;
 }
 
 /****************************************************/
@@ -981,7 +1061,8 @@ polvora.innerHTML = h
 #tooltip{
     z-index: 400;
     position: absolute;
-    width: 400px;
+    width: auto;
+    max-width: 400px;
     border-radius: 0px 0px 0px 15px;
     background-color: #56AAC6;
     box-sizing: border-box;

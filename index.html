@@ -14,8 +14,8 @@
     <!--Estilos propios-->
     <link href="assets/css/fonts.css" rel="stylesheet" type="text/css" />
     <link href="assets/css/reset.css" rel="stylesheet" type="text/css" />
-    <link href="assets/css/master.css?action=getTime&bogus=<?php echo rand(100,999) ?>" rel="stylesheet" type="text/css" />
-    <link href="assets/css/responsive.css?action=getTime&bogus=<?php echo rand(100,999) ?>" rel="stylesheet" type="text/css" />
+    <link href="assets/css/master.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
 
     <!--Libreria spider-->
     <link rel="stylesheet" type="text/css" href="assets/spider/sprites/sprite.css" />
@@ -44,12 +44,17 @@
             <div class="fondo"></div>
             <div id="game-scene">
                 <div id="game-wrapper">
+                    <div id="reloj">
+                        <p id="tiempo-txt">00:00</p>
+                    </div>
                     <div id="cajas"></div>
                     
                     <div id="fondo-win" class="fondo-win-off">
                         <div id="fondo-win-img"></div>
                         <div id="polvora-content"></div>
-                        <h1 id="titulo-win">¡Muy Bien!</h1>
+                        <h1 id="titulo-win">
+                            <span>¡Muy Bien!</span>
+                        </h1>
                     </div>
 
                     <div id="personaje">
@@ -99,35 +104,45 @@
 <script src="assets/js/mobile.js"></script>
 <script src="assets/js/timer.js"></script>
 <script src="assets/js/modal.js"></script>
-<script src="assets/js/game.js?option=getTime&bogus=<?php rand(100,999)?>"></script>
+<script src="assets/js/game.js"></script>
 <script>
 
 var boton_mp3 = null
+var arrastrar_mp3 = null
+var empezar_mp3 = null
+var ganar_mp3 = null
+var gente_mp3 = null
+var polvora_mp3 = null
+var salir_caja_mp3 = null
 
 var animation_start = null
 window.onload = function(){
+    loadAudio({src:'assets/media/arrastrar.mp3',callBack:function(data){
+    arrastrar_mp3 = data
     loadAudio({src:'assets/media/boton.mp3',callBack:function(data){
     boton_mp3 = data
-    /*loadAudio({src:'assets/media/abrir.mp3',callBack:function(data){
-    abrir_mp3 = data
-    loadAudio({src:'assets/media/alarma.mp3',callBack:function(data){
-    alarma_mp3 = data
-    loadAudio({src:'assets/media/coger.mp3',callBack:function(data){
-    coger_mp3 = data
-    loadAudio({src:'assets/media/cronometro.mp3',callBack:function(data){
-    cronometro_mp3 = data
-    cronometro_mp3.addEventListener('ended',function(){cronometro_mp3.play()},false)
+    
+    loadAudio({src:'assets/media/empezar.mp3',callBack:function(data){
+    empezar_mp3 = data
     loadAudio({src:'assets/media/ganar.mp3',callBack:function(data){
-    ganar_mp3 = data*/
+    ganar_mp3 = data
+    loadAudio({src:'assets/media/gente.mp3',callBack:function(data){
+    gente_mp3 = data
+    loadAudio({src:'assets/media/polvora.mp3',callBack:function(data){
+    polvora_mp3 = data
+    loadAudio({src:'assets/media/salir_caja3.mp3',callBack:function(data){
+    salir_caja_mp3 = data
 
         prepareWindow()
         setGame()
-    /*}})
     }})
     }})
     }})
-    }})*/
     }})
+    }})
+    }})
+    }})
+    
 }
     
 </script>

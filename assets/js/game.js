@@ -101,6 +101,7 @@ function empezarJuego(){
 		})
 		
 		getE('cargador').className = 'cargador-off'
+		empezar_mp3.play()
 
 		if(isresponsive){
 			/*getE('cursor-swipe').classList.add('cursor-swipe-animation-1')
@@ -121,7 +122,7 @@ function empezarJuego(){
 				iniciarReloj()
 			},6000)*/
 		}else{
-			//iniciarReloj()
+			iniciarReloj()
 		}
 	})
 }
@@ -242,7 +243,7 @@ function putCajas(){
 		var obj = parejas_data[i]
 
 		var caja1 = document.createElement('div')
-		caja1.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img1+'.png)'
+		//caja1.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img1+'.png)'
 		caja1.className = 'caja caja-closed caja-fill caja-pos-'+posiciones_cajas[p]+' caja-original'
 		caja1.id = 'caja-'+(p+1)
 		caja1.setAttribute('occuped','yes')
@@ -258,7 +259,7 @@ function putCajas(){
 		
 		p++
 		var caja2 = document.createElement('div')
-		caja2.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img2+'.png)'
+		//caja2.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img2+'.png)'
 		caja2.className = 'caja caja-closed caja-fill caja-pos-'+posiciones_cajas[p]+' caja-pirata'
 		caja2.id = 'caja-'+(p+1)
 		caja2.setAttribute('occuped','yes')
@@ -293,10 +294,8 @@ function putCajas(){
 				animation_start = null
 
 				getE('cargador').className = 'cargador-off'	
-
-
-				//setInstrucciones(true)
-				empezarJuego()
+				setInstrucciones(true)
+				//empezarJuego()
 			},1000)
 		}else{
 			spdLoadSprite({idname:cajas_animadas[s].id,autoplay:'off',callBack:function(){
@@ -315,6 +314,7 @@ var caja_abierta_inx_1 = -1
 var caja_abierta_2 = null
 var caja_abierta_inx_2 = -1
 var animacion_delay_box = null
+var animacion_desorden = null
 var caja_abierta_total = 0
 
 var prenda1 = getE('prenda1');
@@ -354,6 +354,8 @@ function clickZona(ident){
 						//abrir bola
 						caja.classList.remove('caja-closed')
 						caja.classList.add('caja-opened')
+						salir_caja_mp3.currentTime = 0
+						salir_caja_mp3.play()
 						
 						//comprobamos que ya se hayan abierto las 2 cajas
 						if(caja_abierta_total==2){
@@ -467,14 +469,15 @@ function clickZona(ident){
 												obj_ropa2.classList.add('ropa-on')
 											}
 
-											if(parejas_encontradas==1){
+											if(parejas_encontradas==total_parejas){
 												finished_game = true
 												ganarJuego()
 											}
 										},800)
 
-										if(parejas_encontradas<1){
+										if(parejas_encontradas<total_parejas){
 											//desorganizar
+											arrastrar_mp3.play()
 											var posiciones_provisorias = unorderArrayElementos((total_parejas*2),null,true)
 											for(j = 0;j<boxes.length;j++){
 												var pos_actual = boxes[j].getAttribute('pos')
@@ -484,9 +487,9 @@ function clickZona(ident){
 											}
 
 											//esperar el desorden
-											animacion_delay_box = setTimeout(function(){
-												clearTimeout(animacion_delay_box)
-												animacion_delay_box = null
+											animacion_desorden = setTimeout(function(){
+												clearTimeout(animacion_desorden)
+												animacion_desorden = null
 
 												caja_abierta_1 = null
 												caja_abierta_inx_1 = -1
@@ -553,6 +556,8 @@ function clickZona(ident){
 var finished_game = false
 var animacion_delay_polvora = null
 function ganarJuego(){
+	ganar_mp3.play()
+
 	//poner cajas sin z-index
 	for(i = 0;i<boxes.length;i++){
 		boxes[i].classList.add('caja-pos-initial')
@@ -564,6 +569,8 @@ function ganarJuego(){
 		clearTimeout(animacion_delay_polvora)
 		animacion_delay_polvora = null
 
+		gente_mp3.play()
+		polvora_mp3.play()
 		setPolvora()
 	},1000)
 }
@@ -615,9 +622,9 @@ function setPolvora(){
 
 function endGame(){
 	setAlerta({
-		top:'92%',
-		left:[10,'%',2],
-		direction:'left',
+		top:'20%',
+		left:[20,'%',2],
+		direction:'right',
 		content:'<p>El tiempo se ha acabado <span>¡Vuelve a intentarlo!</span>.</p>',
 		delay:3000,
 		callback:reiniciarJuego
