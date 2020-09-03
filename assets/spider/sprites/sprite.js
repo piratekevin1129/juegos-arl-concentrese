@@ -265,6 +265,14 @@ function stopAllAnimations(){
     }
 }
 
+function spdSetAnimationFrame(params,ind){
+    var obj = spd_animations[ind]
+    var sprite = obj.sprite
+    var frame = params.frame
+    obj.initial = frame
+    spdSetFrameSprite(obj.initial,sprite)
+}
+
 function spdSpriteSetSecond(llaves,avatar_name,seconds){
     //var segundos = (Math.floor(seconds)*100)/100
     var frame = parseInt((seconds*24))

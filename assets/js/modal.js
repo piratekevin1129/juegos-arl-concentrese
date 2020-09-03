@@ -32,9 +32,9 @@ function setModal(data){
 		getE('modal-button').setAttribute('onclick','')
 	}
 
-	if(data.final!=null&&data.final!=undefined){
-		if(data.final){
-			getE('modal-box').className = 'modal-box-final'
+	if(data.orientation!=null&&data.orientation!=undefined){
+		if(data.orientation=='left'){
+			getE('modal-box').className = 'modal-box-left'
 		}else{
 			getE('modal-box').className = ''
 		}

@@ -44,9 +44,15 @@
             <div class="fondo"></div>
             <div id="game-scene">
                 <div id="game-wrapper">
-                    <div id="reloj">
-                        <p id="tiempo-txt">00:00</p>
+                    <!--menu -->
+                    <div id="menu">
+                        <div id="reloj">
+                            <p id="tiempo-txt">00:00</p>
+                        </div>
+                        <button id="ayuda-btn" onclick="verAyuda()"></button>
                     </div>
+
+                    <!---->
                     <div id="cajas"></div>
                     
                     <div id="fondo-win" class="fondo-win-off">
@@ -55,6 +61,7 @@
                         <h1 id="titulo-win">
                             <span>¡Muy Bien!</span>
                         </h1>
+                        <button id="repetir-btn" onclick="repeatGame()">jugar de nuevo</button>
                     </div>
 
                     <div id="personaje">

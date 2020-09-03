@@ -72,7 +72,7 @@ function setInstrucciones(start){
 			content:html,
 			button:true,
 			value:'jugar',
-			final:false,
+			orientation:'left',
 			action:'empezarJuego'
 	    })
     }else{
@@ -82,7 +82,7 @@ function setInstrucciones(start){
 			content:html,
 			button:true,
 			value:'aceptar',
-			final:false,
+			orientation:'left',
 			action:'seguirJuego'
 	    })
     }
@@ -101,7 +101,6 @@ function empezarJuego(){
 		})
 		
 		getE('cargador').className = 'cargador-off'
-		empezar_mp3.play()
 
 		if(isresponsive){
 			/*getE('cursor-swipe').classList.add('cursor-swipe-animation-1')
@@ -124,12 +123,14 @@ function empezarJuego(){
 		}else{
 			iniciarReloj()
 		}
+		empezar_mp3.play()
 	})
 }
 
 var parejas_data = []
 var total_parejas = 8
 var boxes = []
+var clothes = []
 
 function setGame(){
 	for(i = 0;i<total_parejas;i++){
@@ -231,6 +232,8 @@ function putRopas(){
 		
 		getE('personaje-ropas').appendChild(ropa1)
 		getE('personaje-ropas').appendChild(ropa2)
+		clothes.push(ropa1)
+		clothes.push(ropa2)
 	}
 }
 
@@ -243,7 +246,7 @@ function putCajas(){
 		var obj = parejas_data[i]
 
 		var caja1 = document.createElement('div')
-		//caja1.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img1+'.png)'
+		caja1.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img1+'.png)'
 		caja1.className = 'caja caja-closed caja-fill caja-pos-'+posiciones_cajas[p]+' caja-original'
 		caja1.id = 'caja-'+(p+1)
 		caja1.setAttribute('occuped','yes')
@@ -251,7 +254,7 @@ function putCajas(){
 		caja1.setAttribute('pos',posiciones_cajas[p])
 
 		var h1 = ''
-		h1+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="13" src="assets/images/cajita_sprite.png"></div>'
+		h1+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="11" src="assets/images/cajita_sprite.png"></div>'
 		h1+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(i+1)+obj.img1+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
 		h1+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+numeros_cajas[p]+'</div>'
 		h1+='<div id="caja-zona-'+(p+1)+'" class="caja-zona" onclick="clickZona('+(p+1)+')"></div>'
@@ -259,7 +262,7 @@ function putCajas(){
 		
 		p++
 		var caja2 = document.createElement('div')
-		//caja2.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img2+'.png)'
+		caja2.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img2+'.png)'
 		caja2.className = 'caja caja-closed caja-fill caja-pos-'+posiciones_cajas[p]+' caja-pirata'
 		caja2.id = 'caja-'+(p+1)
 		caja2.setAttribute('occuped','yes')
@@ -267,7 +270,7 @@ function putCajas(){
 		caja2.setAttribute('pos',posiciones_cajas[p])
 
 		var h2 = ''
-		h2+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="13" src="assets/images/cajita_sprite.png"></div>'
+		h2+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="11" src="assets/images/cajita_sprite.png"></div>'
 		h2+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(i+1)+obj.img2+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
 		h2+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+numeros_cajas[p]+'</div>'
 		h2+='<div id="caja-zona-'+(p+1)+'" class="caja-zona" onclick="clickZona('+(p+1)+')"></div>'
@@ -300,6 +303,7 @@ function putCajas(){
 		}else{
 			spdLoadSprite({idname:cajas_animadas[s].id,autoplay:'off',callBack:function(){
 				spdCreateAnimation({id:s,sprite:cajas_animadas[s].id})
+
 				loadSprite((s+1))
 			}})
 		}
@@ -349,7 +353,7 @@ function clickZona(ident){
 				
 				//validar que este cerrada
 				if(caja.className.indexOf('closed')!=-1){
-					spdPlayAnimation({frame:1,stop:7,loop:false,callBack:function(){
+					spdPlayAnimation({frame:1,stop:6,loop:false,callBack:function(){
 						caja_abierta_total++
 						//abrir bola
 						caja.classList.remove('caja-closed')
@@ -477,26 +481,7 @@ function clickZona(ident){
 
 										if(parejas_encontradas<total_parejas){
 											//desorganizar
-											arrastrar_mp3.play()
-											var posiciones_provisorias = unorderArrayElementos((total_parejas*2),null,true)
-											for(j = 0;j<boxes.length;j++){
-												var pos_actual = boxes[j].getAttribute('pos')
-												boxes[j].classList.remove('caja-pos-'+pos_actual)
-												boxes[j].classList.add('caja-pos-'+posiciones_provisorias[j])
-												boxes[j].setAttribute('pos',posiciones_provisorias[j])
-											}
-
-											//esperar el desorden
-											animacion_desorden = setTimeout(function(){
-												clearTimeout(animacion_desorden)
-												animacion_desorden = null
-
-												caja_abierta_1 = null
-												caja_abierta_inx_1 = -1
-												caja_abierta_2 = null
-												caja_abierta_inx_2 = -1
-
-											},2000)
+											desordenarCajas(false)
 
 											//ocultar aqui
 											caja_abierta_1.classList.remove('caja-opened')
@@ -504,7 +489,7 @@ function clickZona(ident){
 											caja_abierta_2.classList.remove('caja-opened')
 											caja_abierta_2.classList.add('caja-closed')
 
-											spdPlayAnimation({frame:8,stop:0,loop:false,callBack:function(){
+											spdPlayAnimation({frame:7,stop:11,loop:false,callBack:function(){
 												//poner cajas vacias
 												caja_abierta_1.classList.remove('caja-fill')
 												caja_abierta_1.classList.add('caja-empty')
@@ -514,11 +499,10 @@ function clickZona(ident){
 												caja_abierta_2.setAttribute('occuped','no')
 
 											}},caja_abierta_inx_1)
-											spdPlayAnimation({frame:8,stop:0,loop:false},caja_abierta_inx_2)
+											spdPlayAnimation({frame:7,stop:11,loop:false},caja_abierta_inx_2)
 										}
 
-									},50)
-									
+									},50)									
 								}else{
 									//no iguales o una vacia
 									caja_abierta_1.classList.remove('caja-opened')
@@ -526,13 +510,14 @@ function clickZona(ident){
 									caja_abierta_2.classList.remove('caja-opened')
 									caja_abierta_2.classList.add('caja-closed')
 
-									spdPlayAnimation({frame:8,stop:0,loop:false,callBack:function(){
+									spdPlayAnimation({frame:7,stop:11,loop:false,callBack:function(){
+										//listo
 										caja_abierta_1 = null
 										caja_abierta_inx_1 = -1
 										caja_abierta_2 = null
 										caja_abierta_inx_2 = -1
 									}},caja_abierta_inx_1)
-									spdPlayAnimation({frame:8,stop:0,loop:false},caja_abierta_inx_2)
+									spdPlayAnimation({frame:7,stop:11,loop:false},caja_abierta_inx_2)
 								}
 							},700)
 						}else{
@@ -551,11 +536,48 @@ function clickZona(ident){
 	}
 }
 
+function desordenarCajas(reset){
+	pararReloj()//parar el tiempo
+	arrastrar_mp3.play()
+	var posiciones_provisorias = unorderArrayElementos((total_parejas*2),null,true)
+	for(j = 0;j<boxes.length;j++){
+		var pos_actual = boxes[j].getAttribute('pos')
+		boxes[j].classList.remove('caja-pos-'+pos_actual)
+		boxes[j].classList.add('caja-pos-'+posiciones_provisorias[j])
+		boxes[j].setAttribute('pos',posiciones_provisorias[j])
+	}
+
+	//esperar el desorden
+	animacion_desorden = setTimeout(function(){
+		clearTimeout(animacion_desorden)
+		animacion_desorden = null
+
+		caja_abierta_1 = null
+		caja_abierta_inx_1 = -1
+		caja_abierta_2 = null
+		caja_abierta_inx_2 = -1
+
+		if(reset){
+			finished_game = false
+			setTooltip({
+				content:'<p>Encuentra las parejas antes de que se acabe el tiempo.</p>',
+				delay:4000
+			})
+
+			iniciarReloj()
+			empezar_mp3.play()
+		}else{
+			reanudarReloj()
+		}
+	},1500)
+}
+
 /////////////////COMPROBAR////////////////
 
 var finished_game = false
 var animacion_delay_polvora = null
 function ganarJuego(){
+	pararReloj()
 	ganar_mp3.play()
 
 	//poner cajas sin z-index
@@ -621,6 +643,15 @@ function setPolvora(){
 }
 
 function endGame(){
+	//remove functions
+	clearTimeout(animacion_delay_box)
+	clearTimeout(animacion_desorden)
+
+	//clear all animations sprites
+	stopAllAnimations()
+
+	finished_game = true
+
 	setAlerta({
 		top:'20%',
 		left:[20,'%',2],
@@ -639,7 +670,41 @@ function repeatGame(){//repetir por ganar el juego
 }
 
 function reiniciarJuego(){//reiniciar, por acabarse el tiempo
-	
+	parejas_encontradas = 0
+	caja_abierta_total = 0
+	prenda1.className = 'prenda-move-off'
+	prenda2.className = 'prenda-move-off'
+
+	//poner cajas llenas
+	for(i = 0;i<boxes.length;i++){
+		boxes[i].classList.remove('caja-empty')
+		boxes[i].classList.remove('caja-fill')
+		boxes[i].classList.add('caja-fill')
+
+		boxes[i].classList.remove('caja-opened')
+		boxes[i].classList.remove('caja-closed')
+		boxes[i].classList.add('caja-closed')
+		
+		boxes[i].setAttribute('occuped','yes')
+
+		//limpiar las animaciones por si las dudas
+		spdStopAnimation(i)
+
+		//poner todas las cajas en el frame 1
+		//var caja_animada = boxes[i].getElementsByClassName('caja-animada')[0].id
+		spdSetAnimationFrame({frame:1},i)
+	}
+
+	//quitar ropas puestas
+	for(i = 0;i<clothes.length;i++){
+		clothes[i].classList.remove('ropa-off')
+		clothes[i].classList.remove('ropa-on')
+
+		clothes[i].classList.add('ropa-off')
+	}
+
+	//desorganizar de nuevo
+	desordenarCajas(true)
 }
 
 function continuarJuego(){
