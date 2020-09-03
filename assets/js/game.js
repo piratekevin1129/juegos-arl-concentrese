@@ -73,7 +73,8 @@ function setInstrucciones(start){
 			button:true,
 			value:'jugar',
 			orientation:'left',
-			action:'empezarJuego'
+			action:'empezarJuego',
+			personaje:'off'
 	    })
     }else{
     	setModal({
@@ -83,7 +84,8 @@ function setInstrucciones(start){
 			button:true,
 			value:'aceptar',
 			orientation:'left',
-			action:'seguirJuego'
+			action:'seguirJuego',
+			personaje:'off'
 	    })
     }
 }
@@ -218,7 +220,7 @@ function putRopas(){
 		ropa1.style.transform = 'translateX(-50%) translateY(-50%)'
 		ropa1.style.mozTransform = 'translateX(-50%) translateY(-50%)'
 		ropa1.style.webkitTransform = 'translateX(-50%) translateY(-50%)'
-		ropa1.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+parejas_data[i].img1+'.png)'
+		ropa1.innerHTML = '<div style="background-image:url(assets/images/elementos/'+(i+1)+parejas_data[i].img1+'.png)"></div>'
 
 		var ropa2 = document.createElement('div')
 		ropa2.id = 'ropa'+parejas_data[i].id+'-p2'
@@ -228,14 +230,20 @@ function putRopas(){
 		ropa2.style.transform = 'translateX(-50%) translateY(-50%)'
 		ropa2.style.mozTransform = 'translateX(-50%) translateY(-50%)'
 		ropa2.style.webkitTransform = 'translateX(-50%) translateY(-50%)'
-		ropa2.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+parejas_data[i].img2+'.png)'
+		ropa2.innerHTML	= '<div style="background-image:url(assets/images/elementos/'+(i+1)+parejas_data[i].img2+'.png)"></div>'
 
+		if(!isresponsive){
+			getE('personaje-ropas').appendChild(ropa1)
+			getE('personaje-ropas').appendChild(ropa2)
+		}else{
+			//poner ropas en el personaje del modal
+			getE('personaje-ropas-responsive').appendChild(ropa1)
+			getE('personaje-ropas-responsive').appendChild(ropa2)
+		}
 		
-		getE('personaje-ropas').appendChild(ropa1)
-		getE('personaje-ropas').appendChild(ropa2)
 		clothes.push(ropa1)
 		clothes.push(ropa2)
-	}
+	}	
 }
 
 function putCajas(){
@@ -247,7 +255,7 @@ function putCajas(){
 		var obj = parejas_data[i]
 
 		var caja1 = document.createElement('div')
-		caja1.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img1+'.png)'
+		//caja1.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img1+'.png)'
 		caja1.className = 'caja caja-closed caja-fill caja-pos-'+posiciones_cajas[p]+' caja-original'
 		caja1.id = 'caja-'+(p+1)
 		caja1.setAttribute('occuped','yes')
@@ -255,7 +263,12 @@ function putCajas(){
 		caja1.setAttribute('pos',posiciones_cajas[p])
 
 		var h1 = ''
-		h1+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="11" src="assets/images/cajita_sprite.png"></div>'
+		if(!isresponsive){
+			h1+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="11" src="assets/images/cajita_sprite.png"></div>'
+		}else{
+			h1+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="100" height="81" frames="11" src="assets/images/cajita_sprite_responsive.png"></div>'
+		}
+		
 		h1+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(i+1)+obj.img1+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
 		h1+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+numeros_cajas[p]+'</div>'
 		caja1.innerHTML = h1
@@ -270,7 +283,7 @@ function putCajas(){
 		
 		p++
 		var caja2 = document.createElement('div')
-		caja2.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img2+'.png)'
+		//caja2.style.backgroundImage = 'url(assets/images/elementos/'+(i+1)+obj.img2+'.png)'
 		caja2.className = 'caja caja-closed caja-fill caja-pos-'+posiciones_cajas[p]+' caja-pirata'
 		caja2.id = 'caja-'+(p+1)
 		caja2.setAttribute('occuped','yes')
@@ -278,7 +291,12 @@ function putCajas(){
 		caja2.setAttribute('pos',posiciones_cajas[p])
 
 		var h2 = ''
-		h2+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="11" src="assets/images/cajita_sprite.png"></div>'
+		if(!isresponsive){
+			h2+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="11" src="assets/images/cajita_sprite.png"></div>'
+		}else{
+			h2+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="100" height="81" frames="11" src="assets/images/cajita_sprite_responsive.png"></div>'
+		}
+		
 		h2+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(i+1)+obj.img2+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
 		h2+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+numeros_cajas[p]+'</div>'
 		//h2+='<div id="caja-zona-'+(p+1)+'" class="caja-zona" onclick="clickZona('+(p+1)+')"></div>'
@@ -344,14 +362,19 @@ var caja_abierta_total = 0
 var prenda1 = getE('prenda1');
 var prenda2 = getE('prenda2');
 var parejas_encontradas = 0
+var animacion_personaje_responsive = null
 
 function overZona(ident){
-	var caja_animada = getE('caja-animada-'+ident)
-	caja_animada.classList.add('caja-over')
+	if(!ismobile){
+		var caja_animada = getE('caja-animada-'+ident)
+		caja_animada.classList.add('caja-over')	
+	}
 }
 function outZona(ident){
-	var caja_animada = getE('caja-animada-'+ident)
-	caja_animada.classList.remove('caja-over')
+	if(!ismobile){
+		var caja_animada = getE('caja-animada-'+ident)
+		caja_animada.classList.remove('caja-over')
+	}
 }
 
 function clickZona(ident){
@@ -411,127 +434,202 @@ function clickZona(ident){
 
 									var obj_caja1 = caja_abierta_1.getElementsByClassName('caja-bola')[0].getElementsByTagName('div')[0]
 									var obj_caja2 = caja_abierta_2.getElementsByClassName('caja-bola')[0].getElementsByTagName('div')[0]
-
-									var origen1 = {
-										x:obj_caja1.getBoundingClientRect().left-game_rect.left,
-										y:obj_caja1.getBoundingClientRect().top-game_rect.top,
-										w:obj_caja1.offsetWidth,
-										h:obj_caja1.offsetHeight
-									}
-									var origen2 = {
-										x:obj_caja2.getBoundingClientRect().left-game_rect.left,
-										y:obj_caja2.getBoundingClientRect().top-game_rect.top,
-										w:obj_caja2.offsetWidth,
-										h:obj_caja2.offsetHeight
-									}
-
 									var obj_ropa1 = getE('ropa'+caja_abierta_1.getAttribute('pair')+'-p1')
 									var obj_ropa2 = getE('ropa'+caja_abierta_2.getAttribute('pair')+'-p2')
-
-									var destino1 = {
-										x:obj_ropa1.getBoundingClientRect().left-game_rect.left,
-										y:obj_ropa1.getBoundingClientRect().top-game_rect.top,
-										w:obj_ropa1.offsetWidth,
-										h:obj_ropa1.offsetHeight,
-									}
-									var destino2 = {
-										x:obj_ropa2.getBoundingClientRect().left-game_rect.left,
-										y:obj_ropa2.getBoundingClientRect().top-game_rect.top,
-										w:obj_ropa2.offsetWidth,
-										h:obj_ropa2.offsetHeight,
-									}
-
-									prenda1.className = 'prenda-move-on'
-									prenda1.style.width = origen1.w+'px'
-									prenda1.style.height = origen1.h+'px'
-									prenda1.style.left = origen1.x+'px'
-									prenda1.style.top = origen1.y+'px'
-									prenda1.style.backgroundImage = obj_caja1.style.backgroundImage
-
-									prenda2.className = 'prenda-move-on'
-									prenda2.style.width = origen2.w+'px'
-									prenda2.style.height = origen2.h+'px'
-									prenda2.style.left = origen2.x+'px'
-									prenda2.style.top = origen2.y+'px'
-									prenda2.style.backgroundImage = obj_caja2.style.backgroundImage
-									
 									parejas_encontradas++
-									//esperar un momentico para animarlos a su nuevo origien
-									animacion_delay_box = setTimeout(function(){
-										clearTimeout(animacion_delay_box)
-										animacion_delay_box = null
 
-										//antes de darle destino, definamos el original y la copia
-										var prenda_original = null
-										var prenda_copia = null
-										if(caja_abierta_1.className.indexOf('caja-original')!=-1){
-											prenda_original = prenda1
-											prenda_copia = prenda2
+									///ATENCIÓN///
+									//validar si es en responsive o pc
+									if(isresponsive){
+										//mostrar modal con el personaje vestido
+										var _title = ''
+										var _content = ''
+										var _button = false
+										var _value = ''
+										var _action = ''
+
+										if(parejas_encontradas<total_parejas){
+											_title = ''
+											_content = ''
+											_button = false
+											_value = ''
+											_action = ''
 										}else{
-											prenda_original = prenda2
-											prenda_copia = prenda1
+											_title = 'Muy Bien'
+											_content = '<p>Has completado este juego. Haz clic en jugar de nuevo</p>'
+											_button = true
+											_value = 'jugar de nuevo'
+											_action = 'repeatGame'
 										}
 
-										prenda_original.className = 'prenda-move-put'
-										prenda_original.style.width = destino1.w+'px'
-										prenda_original.style.height = destino1.h+'px'
-										prenda_original.style.left = destino1.x+'px'
-										prenda_original.style.top = destino1.y+'px'
+										pararReloj()
+										setModal({
+									    	close:false,
+											title:_title,
+											content:_content,
+											button:_button,
+											value:_value,
+											action:_action,
+											personaje:'on',
+											callBack:function(){
+												obj_ropa1.classList.remove('ropa-off')
+												obj_ropa1.classList.add('ropa-on')
+												var pareja_obj = findObj(pareja)
+												if(pareja_obj.img2=='-2'){
+													obj_ropa2.classList.remove('ropa-off')
+													obj_ropa2.classList.add('ropa-on')
+												}
 
-										prenda_copia.className = 'prenda-move-put'
-										prenda_copia.style.width = destino2.w+'px'
-										prenda_copia.style.height = destino2.h+'px'
-										prenda_copia.style.left = destino2.x+'px'
-										prenda_copia.style.top = destino2.y+'px'
+												if(parejas_encontradas<total_parejas){
+													animacion_personaje_responsive = setTimeout(function(){
+														clearTimeout(animacion_personaje_responsive)
+														animacion_personaje_responsive = null
 
-										//esperar que llegue al personaje
+														unsetModal(function(){
+															//desorganizar
+															desordenarCajas(false)
+
+															//ocultar aqui
+															caja_abierta_1.classList.remove('caja-opened')
+															caja_abierta_1.classList.add('caja-closed')
+															caja_abierta_2.classList.remove('caja-opened')
+															caja_abierta_2.classList.add('caja-closed')
+
+															spdPlayAnimation({frame:7,stop:11,loop:false,callBack:function(){
+																//poner cajas vacias
+																caja_abierta_1.classList.remove('caja-fill')
+																caja_abierta_1.classList.add('caja-empty')
+																caja_abierta_1.setAttribute('occuped','no')
+																caja_abierta_2.classList.remove('caja-fill')
+																caja_abierta_2.classList.add('caja-empty')
+																caja_abierta_2.setAttribute('occuped','no')
+
+															}},caja_abierta_inx_1)
+															spdPlayAnimation({frame:7,stop:11,loop:false},caja_abierta_inx_2)
+														})
+													},1500)
+												}else{
+													finished_game = true
+													ganarJuego()
+												}
+											}
+									    })
+									}else{
+										var destino1 = {
+											x:obj_ropa1.getBoundingClientRect().left-game_rect.left,
+											y:obj_ropa1.getBoundingClientRect().top-game_rect.top,
+											w:obj_ropa1.offsetWidth,
+											h:obj_ropa1.offsetHeight,
+										}
+										var destino2 = {
+											x:obj_ropa2.getBoundingClientRect().left-game_rect.left,
+											y:obj_ropa2.getBoundingClientRect().top-game_rect.top,
+											w:obj_ropa2.offsetWidth,
+											h:obj_ropa2.offsetHeight,
+										}
+										var origen1 = {
+											x:obj_caja1.getBoundingClientRect().left-game_rect.left,
+											y:obj_caja1.getBoundingClientRect().top-game_rect.top,
+											w:obj_caja1.offsetWidth,
+											h:obj_caja1.offsetHeight
+										}
+										var origen2 = {
+											x:obj_caja2.getBoundingClientRect().left-game_rect.left,
+											y:obj_caja2.getBoundingClientRect().top-game_rect.top,
+											w:obj_caja2.offsetWidth,
+											h:obj_caja2.offsetHeight
+										}
+
+										prenda1.className = 'prenda-move-on'
+										prenda1.style.width = origen1.w+'px'
+										prenda1.style.height = origen1.h+'px'
+										prenda1.style.left = origen1.x+'px'
+										prenda1.style.top = origen1.y+'px'
+										prenda1.style.backgroundImage = obj_caja1.style.backgroundImage
+
+										prenda2.className = 'prenda-move-on'
+										prenda2.style.width = origen2.w+'px'
+										prenda2.style.height = origen2.h+'px'
+										prenda2.style.left = origen2.x+'px'
+										prenda2.style.top = origen2.y+'px'
+										prenda2.style.backgroundImage = obj_caja2.style.backgroundImage
+										
+										//esperar un momentico para animarlos a su nuevo origien
 										animacion_delay_box = setTimeout(function(){
 											clearTimeout(animacion_delay_box)
 											animacion_delay_box = null
 
-											prenda2.className = 'prenda-move-off'
-											prenda1.className = 'prenda-move-off'
-
-											obj_ropa1.classList.remove('ropa-off')
-											obj_ropa1.classList.add('ropa-on')
-
-											//poner ropas visibles
-											var pareja_obj = findObj(pareja)
-											if(pareja_obj.img2=='-2'){
-												obj_ropa2.classList.remove('ropa-off')
-												obj_ropa2.classList.add('ropa-on')
+											//antes de darle destino, definamos el original y la copia
+											var prenda_original = null
+											var prenda_copia = null
+											if(caja_abierta_1.className.indexOf('caja-original')!=-1){
+												prenda_original = prenda1
+												prenda_copia = prenda2
+											}else{
+												prenda_original = prenda2
+												prenda_copia = prenda1
 											}
 
-											if(parejas_encontradas==total_parejas){
-												finished_game = true
-												ganarJuego()
+											prenda_original.className = 'prenda-move-put'
+											prenda_original.style.width = destino1.w+'px'
+											prenda_original.style.height = destino1.h+'px'
+											prenda_original.style.left = destino1.x+'px'
+											prenda_original.style.top = destino1.y+'px'
+
+											prenda_copia.className = 'prenda-move-put'
+											prenda_copia.style.width = destino2.w+'px'
+											prenda_copia.style.height = destino2.h+'px'
+											prenda_copia.style.left = destino2.x+'px'
+											prenda_copia.style.top = destino2.y+'px'
+
+											//esperar que llegue al personaje
+											animacion_delay_box = setTimeout(function(){
+												clearTimeout(animacion_delay_box)
+												animacion_delay_box = null
+
+												prenda2.className = 'prenda-move-off'
+												prenda1.className = 'prenda-move-off'
+
+												obj_ropa1.classList.remove('ropa-off')
+												obj_ropa1.classList.add('ropa-on')
+
+												//poner ropas visibles
+												var pareja_obj = findObj(pareja)
+												if(pareja_obj.img2=='-2'){
+													obj_ropa2.classList.remove('ropa-off')
+													obj_ropa2.classList.add('ropa-on')
+												}
+
+												if(parejas_encontradas==total_parejas){
+													finished_game = true
+													ganarJuego()
+												}
+											},800)
+
+											if(parejas_encontradas<total_parejas){
+												//desorganizar
+												desordenarCajas(false)
+
+												//ocultar aqui
+												caja_abierta_1.classList.remove('caja-opened')
+												caja_abierta_1.classList.add('caja-closed')
+												caja_abierta_2.classList.remove('caja-opened')
+												caja_abierta_2.classList.add('caja-closed')
+
+												spdPlayAnimation({frame:7,stop:11,loop:false,callBack:function(){
+													//poner cajas vacias
+													caja_abierta_1.classList.remove('caja-fill')
+													caja_abierta_1.classList.add('caja-empty')
+													caja_abierta_1.setAttribute('occuped','no')
+													caja_abierta_2.classList.remove('caja-fill')
+													caja_abierta_2.classList.add('caja-empty')
+													caja_abierta_2.setAttribute('occuped','no')
+
+												}},caja_abierta_inx_1)
+												spdPlayAnimation({frame:7,stop:11,loop:false},caja_abierta_inx_2)
 											}
-										},800)
-
-										if(parejas_encontradas<total_parejas){
-											//desorganizar
-											desordenarCajas(false)
-
-											//ocultar aqui
-											caja_abierta_1.classList.remove('caja-opened')
-											caja_abierta_1.classList.add('caja-closed')
-											caja_abierta_2.classList.remove('caja-opened')
-											caja_abierta_2.classList.add('caja-closed')
-
-											spdPlayAnimation({frame:7,stop:11,loop:false,callBack:function(){
-												//poner cajas vacias
-												caja_abierta_1.classList.remove('caja-fill')
-												caja_abierta_1.classList.add('caja-empty')
-												caja_abierta_1.setAttribute('occuped','no')
-												caja_abierta_2.classList.remove('caja-fill')
-												caja_abierta_2.classList.add('caja-empty')
-												caja_abierta_2.setAttribute('occuped','no')
-
-											}},caja_abierta_inx_1)
-											spdPlayAnimation({frame:7,stop:11,loop:false},caja_abierta_inx_2)
-										}
-
-									},50)									
+										},50)
+									}
 								}else{
 									//no iguales o una vacia
 									caja_abierta_1.classList.remove('caja-opened')
@@ -630,17 +728,23 @@ function ganarJuego(){
 		zones[i].classList.add('caja-pos-initial')
 	}
 
-	getE('fondo-win').className = 'fondo-win-on'
-	getE('personaje').className = 'personaje-win'
+	if(!isresponsive){
+		getE('fondo-win').className = 'fondo-win-on'
+		getE('personaje').className = 'personaje-win'
 
-	animacion_delay_polvora = setTimeout(function(){
-		clearTimeout(animacion_delay_polvora)
-		animacion_delay_polvora = null
+		animacion_delay_polvora = setTimeout(function(){
+			clearTimeout(animacion_delay_polvora)
+			animacion_delay_polvora = null
 
+			gente_mp3.play()
+			polvora_mp3.play()
+			setPolvora()
+		},1000)
+	}else{
 		gente_mp3.play()
-		polvora_mp3.play()
-		setPolvora()
-	},1000)
+	}
+
+	
 }
 
 var animacion_polvora = null
@@ -690,7 +794,9 @@ function setPolvora(){
 function endGame(){
 	//remove functions
 	clearTimeout(animacion_delay_box)
+	animacion_delay_box = null
 	clearTimeout(animacion_desorden)
+	animacion_desorden = null
 
 	//clear all animations sprites
 	stopAllAnimations()

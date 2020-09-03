@@ -11,7 +11,11 @@ function setModal(data){
 		getE('modal-close-btn').style.display = 'none'
 	}
 
-	getE('modal-title').innerHTML = data.title
+	if(data.title!=null&&data.title!=undefined){
+		if(data.title!=''){
+			getE('modal-title').innerHTML = data.title
+		}
+	}
 	getE('modal-content').innerHTML = data.content
 
 	if(data.button){
@@ -42,7 +46,22 @@ function setModal(data){
 		getE('modal-box').className = ''
 	}
 
+	//arreglo para el personaje responsive
+	if(data.personaje=='off'){
+		getE('personaje-responsive').style.display = 'none'
+	}else if(data.personaje=='on'){
+		getE('personaje-responsive').style.display = 'block'
+	}
+
+	modal.style.top = '0px'
 	modal.className = 'modal-on'
+	animacion_modal = setTimeout(function(){
+		clearTimeout(animacion_modal)
+		animacion_modal = null
+		if(data.callBack!=null&&data.callBack!=undefined){
+			data.callBack()
+		}
+	},500)
 }
 
 var animacion_modal = null
@@ -59,6 +78,7 @@ function unsetModal(callBack){
 		if(callBack!=null){
 			callBack()
 		}
+		modal.style.top = '-1000px'
 	},500)
 }
 

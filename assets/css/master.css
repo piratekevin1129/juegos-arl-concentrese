@@ -637,7 +637,7 @@ header{
     -webkit-transition: visibility 0s, opacity 0.5s;
 }
 
-#personaje-main{
+#personaje-main,#personaje-main-responsive{
     position: absolute;
     top: 0px;
     left: 0px;
@@ -649,7 +649,7 @@ header{
     background-repeat: no-repeat;
 }
 
-#personaje-ropas{
+#personaje-ropas,#personaje-ropas-responsive{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -663,22 +663,25 @@ header{
     background-size: contain;
     background-position: center;
 }
-
-.ropa-off{
-    visibility: hidden;
-}
-.ropa-on{
-    visibility: visible;
+.ropa div{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0px;
+    left: 0px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
 }
 
 .ropa-1-p1,.ropa-1-p2{top:42%; left:50%;}
 .ropa-2-p1,.ropa-2-p2{top:10%; left:48%;}
 .ropa-3-p1{top:89%; left:31%;}
-.ropa-4-p1,.ropa-4-p2{top:3%; left:48%;}
+.ropa-4-p1,.ropa-4-p2{top:3%; left:47%;}
 .ropa-5-p1,.ropa-5-p2{top:65%; left:17%;}
 .ropa-6-p1,.ropa-6-p2{top:11%; left:48%;}
 .ropa-7-p1{top:55%; left:18%;}
-.ropa-8-p1,.ropa-8-p2{top:17%; left:48%;}
+.ropa-8-p1,.ropa-8-p2{top:17%; left:47%;}
 
 .ropa-3-p2{top:89%; left:70%;}
 .ropa-7-p2{top:55%; left:80%;}
@@ -906,6 +909,10 @@ header{
     margin-bottom: 20px;
     max-height: 450px;
     overflow: auto;
+}
+
+#personaje-responsive{
+    display: none;
 }
 
 /***********ESTILOS CONTENT DEL MODAL*************/
