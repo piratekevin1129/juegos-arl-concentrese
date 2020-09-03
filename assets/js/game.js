@@ -56,7 +56,12 @@ function setInstrucciones(start){
 	
 	html+='<p>Bienvenido, <span>ARL SURA</span> te invita a poner a prueba tu nivel de conocimiento por medio del juego interactivo:</p>'
 	html+='<p><span>"Arma las parejas de los equipo de protección personal"</span></p>'
-	html+='<p>Para hacerlo debes hacer clic en las cajas que se encuentran en el escenario, pero no te apresures y concéntrate, para que lo realices en el tiempo previsto.</p>'
+	if(ismobile){
+		html+='<p>Para hacerlo debes tocar las cajas que se encuentran en el escenario, pero no te apresures y concéntrate, para que lo realices en el tiempo previsto.</p>'
+	}else{
+		html+='<p>Para hacerlo debes hacer clic en las cajas que se encuentran en el escenario, pero no te apresures y concéntrate, para que lo realices en el tiempo previsto.</p>'
+	}
+	
 	html+='<p><span>¡Animo! empieza a jugar.</span></p>'
 
     if(ismobile){
@@ -122,8 +127,9 @@ function empezarJuego(){
 
 				iniciarReloj()
 			},6000)*/
+			iniciarReloj()
 		}else{
-			//iniciarReloj()
+			iniciarReloj()
 		}
 		empezar_mp3.play()
 	})
@@ -706,7 +712,7 @@ function desordenarCajas(reset){
 			iniciarReloj()
 			empezar_mp3.play()
 		}else{
-			//reanudarReloj()
+			reanudarReloj()
 		}
 	},1500)
 }

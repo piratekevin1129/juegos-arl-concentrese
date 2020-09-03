@@ -13,8 +13,13 @@ function setModal(data){
 
 	if(data.title!=null&&data.title!=undefined){
 		if(data.title!=''){
+			getE('modal-title').style.display = 'block'
 			getE('modal-title').innerHTML = data.title
+		}else{
+			getE('modal-title').style.display = 'none'
 		}
+	}else{
+		getE('modal-title').style.display = 'none'
 	}
 	getE('modal-content').innerHTML = data.content
 
