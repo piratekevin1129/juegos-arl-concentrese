@@ -127,7 +127,7 @@ function empezarJuego(){
 
 				iniciarReloj()
 			},6000)*/
-			iniciarReloj()
+
 		}else{
 			iniciarReloj()
 		}
@@ -736,7 +736,7 @@ function ganarJuego(){
 
 	if(!isresponsive){
 		getE('fondo-win').className = 'fondo-win-on'
-		getE('personaje').className = 'personaje-win'
+		//getE('personaje').className = 'personaje-win'
 
 		animacion_delay_polvora = setTimeout(function(){
 			clearTimeout(animacion_delay_polvora)

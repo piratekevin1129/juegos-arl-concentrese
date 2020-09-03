@@ -157,8 +157,7 @@ header{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    background-image: url(../images/fondo_win_min.png);
-    background-color: #900100;
+    background-color: rgba(0,0,0,0.5);
 }
 .fondo-win-off{
     visibility: hidden;
@@ -172,7 +171,7 @@ header{
     transition: visibility 0s, opacity 1s;
     -webkit-transition: visibility 0s, opacity 1s;
 }
-.fondo-win-on #fondo-win-img{    
+/*.fondo-win-on #fondo-win-img{    
     animation-name: animacion-fondo-win;
     animation-duration: 20s;
     animation-iteration-count: infinite;
@@ -201,8 +200,7 @@ header{
         -webkit-transform: rotate(360deg);
         -o-transform: rotate(360deg);
     }
-
-}
+}*/
 #polvora-content{
     position: absolute;
     width: 100%;
@@ -285,19 +283,19 @@ header{
 
 #titulo-win{
     position: absolute;
-    width: 230px;
+    width: 190px;
     height: 40px;
     top: 87%;  
     left: 50%;
-    left: calc(50% - (115px));
-    left: -moz-calc(50% - (115px));
+    left: calc(50% - (95px));
+    left: -moz-calc(50% - (95px));
     margin: 0px;
 
     display: flex;
     align-items: center;
     justify-content: center;
     font-family: 'Barlow-Bold';
-    font-size: 40px;
+    font-size: 35px;
     text-align: center;
     font-weight: normal;
     line-height: normal;
@@ -317,10 +315,10 @@ header{
     top: calc(100% - 5px);
     top: -moz-calc(100% - 5px);
     background-color: #000000;
-    filter: blur(8px);
-    -webkit-filter: blur(8px);
-    -o-filter: blur(8px);
-    opacity: 0.8;
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+    -o-filter: blur(5px);
+    opacity: 0.5;
     z-index: 0;
 }
 .fondo-win-on #titulo-win{

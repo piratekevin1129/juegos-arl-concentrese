@@ -185,11 +185,8 @@
     #personaje{
         right: 5px;
     }
-    #repetir-btn{
-        bottom: initial !important;
-        left: initial !important;
-        right: 15px !important;
-        top: 20px !important;
+    #titulo-win{
+        left: 20px;
     }
 
     #cajas{
@@ -231,7 +228,6 @@
 
     .caja-zona{
         opacity: 0;
-        z-index: 1000;
     }
 
     .polvora-particle-on div{
