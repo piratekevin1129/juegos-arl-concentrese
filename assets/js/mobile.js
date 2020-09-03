@@ -6,7 +6,7 @@ var instrucciones_label = ""
 
 function prepareWindow(){
     ismobile = isMobileDevice()
-    ismobile = true
+    //ismobile = true
 
     if(window.innerWidth<560){
     	isresponsive = true
