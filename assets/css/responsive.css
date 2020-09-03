@@ -1,5 +1,140 @@
 @media (min-width: 768px){
-    
+    .caja-pos-1{left: 87.05px; top:155.7px; z-index:85;}
+    .caja-pos-2{left: 216.85px; top:155.7px; z-index:86;}
+    .caja-pos-3{left: 346.65px; top:155.7px; z-index:87;}
+    .caja-pos-4{left: 476.5px; top:155.7px; z-index:88;}
+    .caja-pos-5{left: 148.65px; top:246.7px; z-index:89;}
+    .caja-pos-6{left: 278.45px; top:246.7px; z-index:90;}
+    .caja-pos-7{left: 408.25px; top:246.7px; z-index:91;}
+    .caja-pos-8{left: 538.1px; top:246.7px; z-index:92;}
+    .caja-pos-9{left: 87.05px; top:337.6px; z-index:93;}
+    .caja-pos-10{left: 216.85px; top:337.6px; z-index:94;}
+    .caja-pos-11{left: 346.65px; top:337.6px; z-index:95;}
+    .caja-pos-12{left: 476.5px; top:337.6px; z-index:96;}
+    .caja-pos-13{left: 148.65px; top:428.6px; z-index:97;}
+    .caja-pos-14{left: 278.45px; top:428.6px; z-index:98;}
+    .caja-pos-15{left: 408.25px; top:428.6px; z-index:99;}
+    .caja-pos-16{left: 538.1px; top:428.6px; z-index:100;}
+
+    .polvora-particle-on div{
+        animation-iteration-count: 2;
+        animation-duration: 1.5s;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+        -webkit-animation-iteration-count: 2;
+        -webkit-animation-duration: 1.5s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-fill-mode: forwards;
+    }
+
+    @keyframes animacion-particula-polvora-1{
+        0% {
+            left:-1px;
+            top:-0.45px;
+            opacity:1;
+        }
+        25% {
+            left:-47.1px;
+            top:-50px;
+            opacity:0.7;
+        }
+        50% {
+            left:-95.7px;
+            top:-4.25px;
+            opacity:0.4;
+        }
+        75% {
+            left:-112.05px;
+            top:55.15px;
+            opacity:0.1;
+        }
+        100% {
+            left:-118.15px;
+            top:104.15px;
+            opacity:0;
+        }
+    }
+    @keyframes animacion-particula-polvora-2{
+        0% {
+            left:-1px;
+            top:-0.45px;
+            opacity:1;
+        }
+        25% {
+            left:-8.9px;
+            top:-42.25px;
+            opacity:0.7;
+        }
+        50% {
+            left:-35.15px;
+            top:-73.3px;
+            opacity:0.5;
+        }
+        75% {
+            left:-73.25px;
+            top:-56.95px;
+            opacity:0.2;
+        }
+        100% {
+            left:-90.15px;
+            top:-17.7px;
+            opacity:0;
+        }
+    }
+    @keyframes animacion-particula-polvora-3{
+        0% {
+            left:-1px;
+            top:-0.45px;
+            opacity:1;
+        }
+        25% {
+            left:7.5px;
+            top:-41.7px;
+            opacity:0.7;
+        }
+        50% {
+            left:32.8px;
+            top:-73px;
+            opacity:0.5;
+        }
+        75% {
+            left:70.9px;
+            top:-58.35px;
+            opacity:0.2;
+        }
+        100% {
+            left:88.65px;
+            top:-20px;
+            opacity:0;
+        }
+    }
+    @keyframes animacion-particula-polvora-4{
+        0% {
+            left:-1px;
+            top:-0.45px;
+            opacity:1;
+        }
+        25% {
+            left:35.4px;
+            top:-47.9px;
+            opacity:0.7;
+        }
+        50% {
+            left:86.95px;
+            top:-20.45px;
+            opacity:0.5;
+        }
+        75% {
+            left:107.65px;
+            top:39.55px;
+            opacity:0.2;
+        }
+        100% {
+            left:116.65px;
+            top:101.15px;
+            opacity:0;
+        }
+    }
 }
 
 @media (min-width: 560px) and (max-width: 767px){
@@ -25,17 +160,123 @@
         width: 350px;
         padding: 10px;
     }
-    .modal-box-final{
-        left: 11%;
+    .modal-box-left{
+        left: -16%;
     }
     #modal-title{
         font-size: 18px;
     }
-    .elemento-incorrecto{
-        width: 90%;
+
+    /*************GAME*************/
+    #personaje-home{
+        right: 40px;
     }
-    .elemento-incorrecto-img{
-        margin-right: 10px;
+    #menu{
+        top: 10px;
+        left: 5px;
+    }
+    #personaje{
+        right: 5px;
+    }
+    #repetir-btn{
+        bottom: initial !important;
+        left: initial !important;
+        right: 15px !important;
+        top: 20px !important;
+    }
+
+    #cajas{
+        width: 100%;
+        height: 100%;
+    }
+    #zonas{
+        width: 100%;
+        height: 100%;
+    }
+    .caja{
+        /*border: rgba(0,0,0,1) solid 1px;
+        background-color: #FFFFFF;*/
+    }
+
+    .caja-pos-1{left: 11.7%; top:31.3%; z-index:85;}
+    .caja-pos-2{left: 26.8%; top:31.3%; z-index:86;}
+    .caja-pos-3{left: 42.2%; top:31.3%; z-index:87;}
+    .caja-pos-4{left: 57.6%; top:31.3%; z-index:88;}
+    .caja-pos-5{left: 18.5%; top:49.6%; z-index:89;}
+    .caja-pos-6{left: 33.6%; top:49.6%; z-index:90;}
+    .caja-pos-7{left: 49%; top:49.6%; z-index:91;}
+    .caja-pos-8{left: 64.4%; top:49.6%; z-index:92;}
+    .caja-pos-9{left: 11.7%; top:68%; z-index:93;}
+    .caja-pos-10{left: 26.8%; top:68%; z-index:94;}
+    .caja-pos-11{left: 42.2%; top:68%; z-index:95;}
+    .caja-pos-12{left: 57.6%; top:68%; z-index:96;}
+    .caja-pos-13{left: 18.5%; top:86.3%; z-index:97;}
+    .caja-pos-14{left: 33.6%; top:86.3%; z-index:98;}
+    .caja-pos-15{left: 49%; top:86.3%; z-index:99;}
+    .caja-pos-16{left: 64.4%; top:86.3%; z-index:100;}
+
+    .caja-zona{
+        opacity: 0.5;
+        z-index: 1000;
+    }
+
+    .polvora-particle-on div{
+        animation-iteration-count: 1;
+        animation-duration: 1s;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+        -webkit-animation-iteration-count: 1;
+        -webkit-animation-duration: 1s;
+        -webkit-animation-timing-function: linear;
+        -webkit-animation-fill-mode: forwards;
+    }
+    @keyframes animacion-particula-polvora-1{
+        0% {
+            left:0px;
+            top:0px;
+            opacity:1;
+        }
+        100% {
+            left:-120px;
+            top:-100px;
+            opacity:0;
+        }
+    }
+    @keyframes animacion-particula-polvora-2{
+        0% {
+            left:0px;
+            top:0px;
+            opacity:1;
+        }
+        100% {
+            left:-80px;
+            top:-120px;
+            opacity:0;
+        }
+    }
+    @keyframes animacion-particula-polvora-3{
+        0% {
+            left:0px;
+            top:0px;
+            opacity:1;
+        }
+        100% {
+            left:80px;
+            top:-120px;
+            opacity:0;
+        }
+    }
+    @keyframes animacion-particula-polvora-4{
+        0% {
+            left:0px;
+            top:0px;
+            opacity:1;
+        }
+        100% {
+            left:120px;
+            top:-100px;
+            opacity:0;
+        }
     }
 }
 
@@ -65,7 +306,7 @@
         width: 95%;
         padding: 10px;
     }
-    .modal-box-final{
+    .modal-box-left{
         left: initial;
     }
     #modal-title{
@@ -73,6 +314,9 @@
     }
     #modal-button{
         cursor: default;
+        height: 35px;
+        bottom: -17.5px;
+        font-size: 16px;
     }
     #modal-close-btn{
         cursor: default;
@@ -89,4 +333,53 @@
     .tooltip-on{
         right: 5%;
     }
+
+    /*************GAME*************/
+
+    #menu{
+        top: 10px;
+        left: 5px;
+    }
+    #personaje{
+        display: none;
+    }
+    #repetir-btn{
+        bottom: initial !important;
+        left: 50% !important;
+        left: calc(50% - 80px);
+        left: -moz-calc(50% - 80px);
+        right: initial !important;
+    }
+
+    #cajas{
+        width: 100%;
+        height: 100%;
+    }
+    #zonas{
+        width: 100%;
+        height: 100%;
+    }
+    .caja{
+        /*border: rgba(0,0,0,1) solid 1px;
+        background-color: #FFFFFF;*/
+    }
+    #personaje-home{
+        display: none;
+    }
+    .caja-pos-1{left: 11.7%; top:29.9%; z-index:85;}
+    .caja-pos-2{left: 33.2%; top:29.9%; z-index:86;}
+    .caja-pos-3{left: 54.8%; top:29.9%; z-index:87;}
+    .caja-pos-4{left: 76.3%; top:29.9%; z-index:88;}
+    .caja-pos-5{left: 22.5%; top:49.8%; z-index:89;}
+    .caja-pos-6{left: 44.3%; top:49.8%; z-index:90;}
+    .caja-pos-7{left: 66.2%; top:49.8%; z-index:91;}
+    .caja-pos-8{left: 88%; top:49.8%; z-index:92;}
+    .caja-pos-9{left: 11.7%; top:69.7%; z-index:93;}
+    .caja-pos-10{left: 33.2%; top:69.7%; z-index:94;}
+    .caja-pos-11{left: 54.8%; top:69.7%; z-index:95;}
+    .caja-pos-12{left: 76.3%; top:69.7%; z-index:96;}
+    .caja-pos-13{left: 22.5%; top:89.5%; z-index:97;}
+    .caja-pos-14{left: 44.3%; top:89.5%; z-index:98;}
+    .caja-pos-15{left: 66.2%; top:89.5%; z-index:99;}
+    .caja-pos-16{left: 88%; top:89.5%; z-index:100;}
 }

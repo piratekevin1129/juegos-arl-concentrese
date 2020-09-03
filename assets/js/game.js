@@ -121,7 +121,7 @@ function empezarJuego(){
 				iniciarReloj()
 			},6000)*/
 		}else{
-			iniciarReloj()
+			//iniciarReloj()
 		}
 		empezar_mp3.play()
 	})
@@ -131,6 +131,7 @@ var parejas_data = []
 var total_parejas = 8
 var boxes = []
 var clothes = []
+var zones = []
 
 function setGame(){
 	for(i = 0;i<total_parejas;i++){
@@ -257,8 +258,15 @@ function putCajas(){
 		h1+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="11" src="assets/images/cajita_sprite.png"></div>'
 		h1+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(i+1)+obj.img1+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
 		h1+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+numeros_cajas[p]+'</div>'
-		h1+='<div id="caja-zona-'+(p+1)+'" class="caja-zona" onclick="clickZona('+(p+1)+')"></div>'
 		caja1.innerHTML = h1
+
+		var zona1 = document.createElement('div')
+		zona1.className = 'caja-zona caja-pos-'+posiciones_cajas[p]
+		zona1.setAttribute('onclick','clickZona('+(p+1)+')')
+		zona1.setAttribute('onmouseover','overZona('+(p+1)+')')
+		zona1.setAttribute('onmouseout','outZona('+(p+1)+')')
+		zona1.id = 'caja-zona-'+(p+1)
+		zona1.setAttribute('pos',posiciones_cajas[p])
 		
 		p++
 		var caja2 = document.createElement('div')
@@ -273,16 +281,28 @@ function putCajas(){
 		h2+='<div id="caja-animada-'+(p+1)+'" class="spd_sprite caja-animada" width="123" height="100" frames="11" src="assets/images/cajita_sprite.png"></div>'
 		h2+='<div id="caja-bola-'+(p+1)+'" class="caja-bola"><div style="background-image:url(assets/images/elementos/'+(i+1)+obj.img2+'.png)"></div><p>¡Esta caja esta vacía!</p></div>'
 		h2+='<div id="caja-number-'+(p+1)+'" class="caja-number">'+numeros_cajas[p]+'</div>'
-		h2+='<div id="caja-zona-'+(p+1)+'" class="caja-zona" onclick="clickZona('+(p+1)+')"></div>'
+		//h2+='<div id="caja-zona-'+(p+1)+'" class="caja-zona" onclick="clickZona('+(p+1)+')"></div>'
 		caja2.innerHTML = h2
+
+		var zona2 = document.createElement('div')
+		zona2.className = 'caja-zona caja-pos-'+posiciones_cajas[p]
+		zona2.setAttribute('onclick','clickZona('+(p+1)+')')
+		zona2.setAttribute('onmouseover','overZona('+(p+1)+')')
+		zona2.setAttribute('onmouseout','outZona('+(p+1)+')')
+		zona2.id = 'caja-zona-'+(p+1)
+		zona2.setAttribute('pos',posiciones_cajas[p])
 
 		getE('cajas').appendChild(caja1)
 		getE('cajas').appendChild(caja2)
+		getE('zonas').appendChild(zona1)
+		getE('zonas').appendChild(zona2)
 
 		p++
 
 		boxes.push(caja1)
 		boxes.push(caja2)
+		zones.push(zona1)
+		zones.push(zona2)
 	}
 
 	//load sprites
@@ -324,6 +344,15 @@ var caja_abierta_total = 0
 var prenda1 = getE('prenda1');
 var prenda2 = getE('prenda2');
 var parejas_encontradas = 0
+
+function overZona(ident){
+	var caja_animada = getE('caja-animada-'+ident)
+	caja_animada.classList.add('caja-over')
+}
+function outZona(ident){
+	var caja_animada = getE('caja-animada-'+ident)
+	caja_animada.classList.remove('caja-over')
+}
 
 function clickZona(ident){
 	if(!finished_game){
@@ -540,11 +569,21 @@ function desordenarCajas(reset){
 	pararReloj()//parar el tiempo
 	arrastrar_mp3.play()
 	var posiciones_provisorias = unorderArrayElementos((total_parejas*2),null,true)
+
+	//ocultar zonas
+	getE('zonas').style.visibility = 'hidden'
 	for(j = 0;j<boxes.length;j++){
 		var pos_actual = boxes[j].getAttribute('pos')
 		boxes[j].classList.remove('caja-pos-'+pos_actual)
 		boxes[j].classList.add('caja-pos-'+posiciones_provisorias[j])
 		boxes[j].setAttribute('pos',posiciones_provisorias[j])
+	}
+
+	for(j = 0;j<zones.length;j++){
+		var pos_actual = zones[j].getAttribute('pos')
+		zones[j].classList.remove('caja-pos-'+pos_actual)
+		zones[j].classList.add('caja-pos-'+posiciones_provisorias[j])
+		zones[j].setAttribute('pos',posiciones_provisorias[j])
 	}
 
 	//esperar el desorden
@@ -556,6 +595,8 @@ function desordenarCajas(reset){
 		caja_abierta_inx_1 = -1
 		caja_abierta_2 = null
 		caja_abierta_inx_2 = -1
+		//mostrar zonas otra vez
+		getE('zonas').style.visibility = 'visible'
 
 		if(reset){
 			finished_game = false
@@ -567,7 +608,7 @@ function desordenarCajas(reset){
 			iniciarReloj()
 			empezar_mp3.play()
 		}else{
-			reanudarReloj()
+			//reanudarReloj()
 		}
 	},1500)
 }
@@ -584,6 +625,11 @@ function ganarJuego(){
 	for(i = 0;i<boxes.length;i++){
 		boxes[i].classList.add('caja-pos-initial')
 	}
+	//poner zonas sin z-index
+	for(i = 0;i<zones.length;i++){
+		zones[i].classList.add('caja-pos-initial')
+	}
+
 	getE('fondo-win').className = 'fondo-win-on'
 	getE('personaje').className = 'personaje-win'
 
@@ -639,7 +685,6 @@ function setPolvora(){
 			p++
 		}
 	},200)
-
 }
 
 function endGame(){
