@@ -926,6 +926,52 @@ header{
     justify-content: center;
     align-items: center;
 }
+.modal-instrucciones-gif > div{
+    position: relative;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.modal-instrucciones-gif > div video{
+    display: block;
+    margin: 0px auto;
+    cursor: pointer;
+}
+.modal-instrucciones-gif > div button{
+    visibility: visible;
+    cursor: pointer;
+    position: absolute;
+    background-color: rgba(0,0,0,0);
+    border: none;
+    padding: 0px;
+    margin: 0px;
+    width: 35px;
+    height: 35px;
+    top: 50%;
+    top: calc(50% - 17.5px);
+    top: -moz-calc(50% - 17.5px);
+    left: 50%;
+    left: calc(50% - 20px);
+    left: -moz-calc(50% - 20px);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.3));
+    -webkit-filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.3));
+    -o-filter: drop-shadow(0px 0px 3px rgba(0,0,0,0.3));
+    background-image: url(../images/play.svg);
+}
+.video-playing{
+    visibility: hidden !important;
+    background-image: url(../images/pause.svg) !important;
+}
+.modal-instrucciones-gif > div:hover .video-playing{
+    visibility: visible !important;
+}
+
+
 .modal-instrucciones-gif img{
     display: block;
 }

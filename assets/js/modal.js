@@ -139,3 +139,16 @@ function setTooltip(data){
 		getE('tooltip').className = 'tooltip-off'		
 	},data.delay)
 }
+
+////////////////////VIDEO INSTRUCCIONES////////////////
+function setVideoInstrucciones(div){
+	var video = div.getElementsByTagName('video')[0]
+	var btn = div.getElementsByTagName('button')[0]
+	if(btn.className==''){
+		btn.className = 'video-playing'
+		video.play()
+	}else{
+		btn.className = ''
+		video.pause()
+	}
+}
