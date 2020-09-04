@@ -615,25 +615,25 @@ function clickZona(ident){
 											if(parejas_encontradas<total_parejas){
 												//desorganizar
 												desordenarCajas(false)
-
-												//ocultar aqui
-												caja_abierta_1.classList.remove('caja-opened')
-												caja_abierta_1.classList.add('caja-closed')
-												caja_abierta_2.classList.remove('caja-opened')
-												caja_abierta_2.classList.add('caja-closed')
-
-												spdPlayAnimation({frame:7,stop:11,loop:false,callBack:function(){
-													//poner cajas vacias
-													caja_abierta_1.classList.remove('caja-fill')
-													caja_abierta_1.classList.add('caja-empty')
-													caja_abierta_1.setAttribute('occuped','no')
-													caja_abierta_2.classList.remove('caja-fill')
-													caja_abierta_2.classList.add('caja-empty')
-													caja_abierta_2.setAttribute('occuped','no')
-
-												}},caja_abierta_inx_1)
-												spdPlayAnimation({frame:7,stop:11,loop:false},caja_abierta_inx_2)
 											}
+
+											//ocultar aqui
+											caja_abierta_1.classList.remove('caja-opened')
+											caja_abierta_1.classList.add('caja-closed')
+											caja_abierta_2.classList.remove('caja-opened')
+											caja_abierta_2.classList.add('caja-closed')
+
+											spdPlayAnimation({frame:7,stop:11,loop:false,callBack:function(){
+												//poner cajas vacias
+												caja_abierta_1.classList.remove('caja-fill')
+												caja_abierta_1.classList.add('caja-empty')
+												caja_abierta_1.setAttribute('occuped','no')
+												caja_abierta_2.classList.remove('caja-fill')
+												caja_abierta_2.classList.add('caja-empty')
+												caja_abierta_2.setAttribute('occuped','no')
+
+											}},caja_abierta_inx_1)
+											spdPlayAnimation({frame:7,stop:11,loop:false},caja_abierta_inx_2)
 										},50)
 									}
 								}else{
@@ -643,14 +643,17 @@ function clickZona(ident){
 									caja_abierta_2.classList.remove('caja-opened')
 									caja_abierta_2.classList.add('caja-closed')
 
-									spdPlayAnimation({frame:7,stop:11,loop:false,callBack:function(){
+									/*spdSetAnimationFrame({frame:1},caja_abierta_inx_1)
+									spdSetAnimationFrame({frame:1},caja_abierta_inx_2)*/
+
+									spdPlayAnimation({frame:10,stop:11,loop:false,callBack:function(){
 										//listo
 										caja_abierta_1 = null
 										caja_abierta_inx_1 = -1
 										caja_abierta_2 = null
 										caja_abierta_inx_2 = -1
 									}},caja_abierta_inx_1)
-									spdPlayAnimation({frame:7,stop:11,loop:false},caja_abierta_inx_2)
+									spdPlayAnimation({frame:10,stop:11,loop:false},caja_abierta_inx_2)
 								}
 							},700)
 						}else{
