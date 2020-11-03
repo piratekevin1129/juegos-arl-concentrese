@@ -461,7 +461,7 @@ function clickZona(ident){
 											_value = ''
 											_action = ''
 										}else{
-											_title = 'Muy Bien'
+											_title = 'Muy bien'
 											_content = '<p>Has completado este juego. Haz clic en jugar de nuevo</p>'
 											_button = true
 											_value = 'jugar de nuevo'

@@ -142,6 +142,14 @@
             opacity:0;
         }
     }
+
+    #modal-button:hover,#repetir-btn:hover{
+        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        background-color: #0097A3;
+        cursor: pointer;
+    }
 }
 
 @media (min-width: 560px) and (max-width: 767px){
@@ -287,6 +295,14 @@
             top:-100px;
             opacity:0;
         }
+    }
+
+    #modal-button:hover,#repetir-btn:hover{
+        transform: scale(1.1);
+        -webkit-transform: scale(1.1);
+        -o-transform: scale(1.1);
+        background-color: #0097A3;
+        cursor: pointer;
     }
 }
 
